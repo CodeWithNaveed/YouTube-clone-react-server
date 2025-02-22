@@ -44,6 +44,11 @@ app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
 app.use("/api/comments", commentRoutes);
 
+// Home Route
+app.get("/", (req, res) => {
+    res.send("Hello from Server!");
+});
+
 // Error Handling Middleware
 app.use((err, req, res, next) => {
     console.error("Error Middleware:", err);

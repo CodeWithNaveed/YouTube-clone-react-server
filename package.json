@@ -15,7 +15,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "postinstall": "npm install --omit=dev"
   },
   "keywords": [],
   "author": "",

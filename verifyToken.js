@@ -12,12 +12,29 @@ import { createError } from "./utils/error.js";
 //     });
 // };
 
-export const verifyToken = (req, res, next) => {
-    const token = req.cookies.access_token;
-    if (!token) return res.status(403).json("Not authenticated!");
+// export const verifyToken = (req, res, next) => {
+//     const token = req.cookies.access_token;
+//     if (!token) return res.status(403).json("Not authenticated!");
     
+//     jwt.verify(token, process.env.JWT, (err, user) => {
+//         if (err) return res.status(403).json("Invalid token!");
+//         req.user = user;
+//         next();
+//     });
+// };
+
+
+export const verifyToken = (req, res, next) => {
+    const token = req.headers.authorization?.split(" ")[1]; // Token extract karo
+
+    if (!token) {
+        return res.status(403).json({ message: "Access denied! No token provided." });
+    }
+
     jwt.verify(token, process.env.JWT, (err, user) => {
-        if (err) return res.status(403).json("Invalid token!");
+        if (err) {
+            return res.status(403).json({ message: "Invalid token!" });
+        }
         req.user = user;
         next();
     });

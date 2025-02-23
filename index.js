@@ -49,11 +49,11 @@ app.get("/", (req, res) => {
     res.send("Hello from Server!");
 });
 
-app.get("/test1", (req, res) => {
-    res.send("test 1!");
-});
-app.get("/test1/test2", (req, res) => {
-    res.send("test 2!");
+// Catch-all Route
+app.use((req, res, next) => {
+    const error = new Error("Not Found");
+    error.status = 404;
+    next(error);
 });
 
 // Error Handling Middleware

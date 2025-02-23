@@ -29,12 +29,12 @@ if (!process.env.MONGO) {
 }
  
 // Middlewares
-app.use(cors(
-    {
-        origin: "http://localhost:5173",
-        credentials: true
-    }
-)); // Handle CORS
+app.use(
+    cors({
+        origin: ["http://localhost:5173", "https://you-tube-clone-eight-pink.vercel.app"],
+        credentials: true,
+    })
+);
 app.use(cookieParser());
 app.use(express.json());
 
